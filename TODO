@@ -1,0 +1,31 @@
+================================================================================
+http://stackoverflow.com/questions/13116488/detailed-guide-on-using-gcov-with-cmake-cdash
+--------------------------------------------------------------------------------
+
+I've been using
+https://github.com/bilke/cmake-modules/blob/master/CodeCoverage.cmake
+successfully.
+
+Just followed the guidelines: added the files to my CMAKE_MODULE_PATH directory,
+added
+
+set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMakeModules)
+if(CMAKE_COMPILER_IS_GNUCXX)
+    include(CodeCoverage)
+    setup_target_for_coverage(${PROJECT_NAME}_coverage ${PROJECT_TEST_NAME}
+coverage)
+endif()
+
+in my CMakeLists.txt. I also added manually gcov as a dependency for my target:
+
+if(CMAKE_COMPILER_IS_GNUCXX)
+    target_link_libraries(${PROJECT_TEST_NAME} gcov)
+endif()
+
+With this, I just type
+
+make my_project_coverage
+
+and I get the html report in the coverage directory of my build tree.
+
+================================================================================
