@@ -1,0 +1,34 @@
+================================================================================
+http://www.databaseskill.com/3953461/
+
+CMake Add gcov code coverage testing support
+Tag: linker, Test, C / C + +, Apple, Linux / Unix Category: Mysql Author: HU115
+Date: 2013-01-17
+
+CMake Add gcov code coverage testing support
+
+(Kim Hing column)
+
+In the root CMakeList.txt Add ENABLE_GCOV options:
+
+OPTION (ENABLE_GCOV "Enable gcov (debug, Linux builds only)" OFF)
+IF (ENABLE_GCOV AND NOT WIN32 AND NOT APPLE)
+    SET (CMAKE_CXX_FLAGS_DEBUG "$ {CMAKE_CXX_FLAGS_DEBUG}-fprofile-arcs-ftest-coverage")
+    SET (CMAKE_C_FLAGS_DEBUG "$ {CMAKE_C_FLAGS_DEBUG}-fprofile-arcs-ftest-coverage")
+    SET (CMAKE_EXE_LINKER_FLAGS_DEBUG "$ {CMAKE_EXE_LINKER_FLAGS_DEBUG}-fprofile-arcs-ftest-coverage-lgcov")
+ENDIF ()
+
+
+The above code from MySQL CMakeLists.txt.
+
+Perform cmake as follows:
+
+cmake SRC_DIR-DCMAKE_BUILD_TYPE = Debug-DENABLE_GCOV = 1
+
+
+After the compiler can see in Figure file *. Gcno the.
+
+Running, you can see the data file * gcda generated.
+
+Perform the gcov main.cpp.gcno to generate main.cpp.gcov test results.
+================================================================================
