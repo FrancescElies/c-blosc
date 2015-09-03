@@ -25,7 +25,7 @@ before_script:
   - if [[ $TRAVIS_OS_NAME == 'linux' && $CC == 'gcc' ]]; then mkdir build_debug; fi
   - if [[ $TRAVIS_OS_NAME == 'linux' && $CC == 'gcc' ]]; then cd build_debug; fi
   - if [[ $TRAVIS_OS_NAME == 'linux' && $CC == 'gcc' ]]; then build_debug_folder=`pwd`; fi
-  - if [[ $TRAVIS_OS_NAME == 'linux' && $CC == 'gcc' ]]; then cmake -DCOVERALLS=ON -DCMAKE_BUILD_TYPE=Debug ..; fi
+  - if [[ $TRAVIS_OS_NAME == 'linux' && $CC == 'gcc' ]]; then cmake -DTEST_INCLUDE_BENCH_BITSHUFFLE_N=OFF -DCOVERALLS=ON -DCMAKE_BUILD_TYPE=Debug ..; fi
 
 script:
   - cd ${build_release_folder}
